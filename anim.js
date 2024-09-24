@@ -49,3 +49,35 @@ function resetStyling() {
     }, 2200);
 
 }
+
+// Get all elements with the class "letter"
+const letters = document.querySelectorAll('.letter');
+
+// Add an event listener to each letter
+letters.forEach((letter) => {
+  letter.addEventListener('animationstart', () => {
+    // Add the ripple effect class when the animation starts
+    letter.classList.add('ripple');
+  });
+
+  letter.addEventListener('animationend', () => {
+    // Remove the ripple effect class when the animation ends
+    letter.classList.remove('ripple');
+  });
+});
+
+// Get the last letter
+const lastLetter = letters[letters.length - 1];
+
+// Add an event listener to the last letter
+lastLetter.addEventListener('animationend', () => {
+  // Restart the animation after 3 seconds
+    setTimeout(() => {
+    letters.forEach((letter) => {
+    letter.style.animation = 'none';
+    setTimeout(() => {
+        letter.style.animation = '';
+    }, 10);
+    });
+}, 3500);
+});
